@@ -122,7 +122,7 @@ Change 0000XXXX in the second line of code to your desired destination.
 D2000000 00000000
 ```
 
-Milker and Shears Max Level (99) 
+Milker and Shears Max Level (99)  
 `123DDEB4 0000C78E`
 
 Milker +1 Level Every Use  
