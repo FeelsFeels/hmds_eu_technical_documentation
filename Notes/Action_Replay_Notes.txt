@@ -1,0 +1,163 @@
+==============
+CODE TYPES
+==============
+
+Memory Writes:
+---------------
+0XXXXXXX YYYYYYYY – 32bit write to [XXXXXXX + offset]
+1XXXXXXX 0000YYYY – 16bit write to [XXXXXXX + offset]
+2XXXXXXX 000000YY – 8bit write to [XXXXXXX + offset]
+
+Conditional 32bit codes:
+-------------------------
+3XXXXXXX YYYYYYYY – Greater Than (YYYYYYYY > [XXXXXXX + offset])
+4XXXXXXX YYYYYYYY – Less Than (YYYYYYYY < [XXXXXXX + offset])
+5XXXXXXX YYYYYYYY – Equal To (YYYYYYYY == [XXXXXXX + offset])
+6XXXXXXX YYYYYYYY – Not Equal To (YYYYYYYY != [XXXXXXX + offset])
+
+Conditional 16bit codes:
+-------------------------
+7XXXXXXX ZZZZYYYY – Greater Than (YYYY > [XXXXXXX + offset] & ~ZZZZ)
+8XXXXXXX ZZZZYYYY – Less Than (YYYY < [XXXXXXX + offset] & ~ZZZZ)
+9XXXXXXX ZZZZYYYY – Equal To (YYYY == [XXXXXXX + offset] & ~ZZZZ)
+AXXXXXXX ZZZZYYYY – Not Equal To (YYYY != [XXXXXXX + offset] & ~ZZZZ)
+
+Conditional mode:
+-----------------------
+DFFFFFFF 00000000 - Conditional codes: value of address is compared to YYYY (immediate value)
+DFFFFFFF 00000001 - Conditional codes: value of address is compared to active data register
+DFFFFFFF 00000002 - Conditional codes: active data register is compared to YYYY (immediate value)
+DFFFFFFF 00000003 - Conditional codes: active storage register is compared to YYYY (immediate value)
+DFFFFFFF 00000004 - Conditional codes: active data register is compared to active storage register
+
+
+
+Mine floor numbers
+0x23DBD2E (NA1.0) | 0x23DBD2A (NA1.1)
+0x23DBCCA (EU1.1)
+
+Mine Floor Mod
+
+Start+Down =saves money, A+B = brings your money back, Select = sets your money to 0, R= +1 (floor), Up+A = +10 (floors),
+
+Down+A = -10 (floors), L = -1 (floor), Up+Left+B = quickly going up at +100s (floors) - Note: no buttons = code disabled
+
+423dbd2a 0000ffff
+
+123dbd2a 0000ffff
+
+d2000000 00000000
+
+94000130 00000377
+
+d3000000 023d6b04
+
+f2ffe5b0 00000004
+
+d2000000 00000000
+
+94000130 000003fc
+
+d3000000 02ffe5b0
+
+f23d6b04 00000004
+
+d2000000 00000000
+
+94000130 fffb0000
+
+023d6b04 00000000
+
+d2000000 00000000
+
+94000130 000003ff
+
+d3000000 023d6b04
+
+f23dbd2a 00000002
+
+d2000000 00000000
+
+94000130 feff0000
+
+74000100 ff00000f
+
+d9000000 023d6b04
+
+d4000000 00000001
+
+d6000000 023d6b04
+
+d2000000 00000000
+
+94000130 fdff0000
+
+74000100 ff00000f
+
+d9000000 023d6b04
+
+d4000000 ffffffff
+
+d6000000 023d6b04
+
+d2000000 00000000
+
+94000130 000003be
+
+74000100 ff00000f
+
+d9000000 023d6b04
+
+d4000000 0000000a
+
+d6000000 023d6b04
+
+d2000000 00000000
+
+94000130 000003bd
+
+d9000000 023d6b04
+
+d4000000 00000064
+
+d6000000 023d6b04
+
+d2000000 00000000
+
+94000130 0000037e
+
+74000100 ff00000f
+
+d9000000 023d6b04
+
+d4000000 fffffff6
+
+d6000000 023d6b04
+
+d2000000 00000000
+
+
+
+second code:
+
+Mine Floor Mod Manual (Start+Select)
+
+Note: set it one floor before your destination, press select+start on the top floor, go down a staircase.
+
+94000130 000003F3
+
+123BEE16 0000XXXX
+
+D2000000 00000000
+
+
+Tool leveling
+All tools maxed out (including milker & shears)
+123C104C 0000C992
+023C105C FFFFFFFF
+023C1060 FFFFFFFF
+023C1064 FFFFFFFF
+
+Level up (each time you use the milker/shears, they level up)
+023C1068 FFFFFFFF
+

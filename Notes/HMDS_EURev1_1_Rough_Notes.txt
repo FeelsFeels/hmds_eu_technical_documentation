@@ -1,0 +1,122 @@
+Mine floor numbers
+0x23DBD2E (NA1.0) | 0x23DBD2A (NA1.1) | 0x23DBCCA (EU1.1)
+
+
+Flora AP 0x23DBEDC
+CarterFP 0x23DBEB0
+difference = 44 bytes. matches the below table.
+flora AP - 40 = carter AP
+carter AP - 4 = carter FP
+carter's base is 0x23DBEB0 - 4 = 0x23DBEAC
+table base is 0x23DBEAC - (12*40) = 0x23DBCCC
+
+123DBEDC 0000FFFF Flora AP max
+123DBEDC 00009C40 Flora AP 40,000
+123DBEDC 0000C350 Flora AP 50,000
+
+
+List of NPCs in order for the NPC table
+Table of NPC information (new NPC every 40 bytes): 0x23DBD30 (NA1.0)
+Table of NPC locations (new NPC every 8 bytes): 0x23D7AE0 (NA1.0)
+
+0) Player Character*
+1) Celia
+2) Muffy
+3) Nami
+4) Romana
+5) Sebastian
+6) Lumina
+7) Wally
+8) Chris
+9) Grant
+10) Kate
+11) Hugh
+12) Carter
+13) Flora
+14) Vesta
+15) Marlin
+16) Ruby
+17) Rock
+18) Dr. Hardy
+19) Galen
+20) Nina
+21) Daryl
+22) Cody
+23) Gustafa
+24) Griffin
+25) Vans
+26) Kassey
+27) Patrick
+28) Murrey
+29) Takakura
+30)
+31)
+32)
+33)
+34)
+35)
+36)
+37)
+38)
+39) Kai
+40)
+41)
+42)
+43)
+44)
+45) Harvest Goddess
+46) Thomas
+47) Gotz
+48) 
+49) Leia
+50) Keira
+51) Witch Princess
+52) † (list of sprites)
+
+Byte information for NPC table
+Loc | Lnk | Plc | Plik | FP | Interac (2B) | (1B) | LP(2B) | (10B) | NPC Path (8B) | PWait (2B) | (2B) | Cwait(2B) | (5B/6B)
+
+I believe, mathetmatically, the padding at the back is 6bytes, not 5, to match the table size of 40 bytes.
+
+Loc = Current location (see Map section for byte values)*
+Lnk = Entrance ID to the current location*
+Plc = Previous location (see Map section for byte values)*
+Plik = Exit ID of previous location*
+FP = Friendship points
+LP = Love Point
+Interac = Interaction (did you talk to the NPC today, did you give it a gift…)
+NPC Path = Path information
+P Wait = Timer waiting for next action along path
+C Wait = Waiting when character blocks them
+* Only for Player Character (00 00 00 00 for everyone else)
+
+
+=================================================
+Tools Experience gauge:
+	Milker EXP: 0x23DDF30 (NA1.0) | 0x23DDED2 (EU 1.1)
+	Shear EXP : 			0x23DDED0
+Tools Level:
+	Milker Level: 0x23DDEB4 (EU 1.1)
+	Shear Level : 0x23DDEB5-B6
+
+Little endian. The first byte of the experience gauge is the LSB. Second byte is MSB. 
+LSB is incremented by 100 every time you use the tool. 0->100->200->0, after which MSB increments by one.
+After MSB ticks over FF, the tool level increases by 1.
+
+0x27E326C (EU1.1) is the ghost variable for where the Milker Level UI is displayed. Modifying has no effect.
+223DDED3 000000FF or 123DDED2 0000FFFF are good for levelling after a couple of presses.
+
+The actual memory for the milker level is at 0x23DDEB4, 2 bytes (not 1!)
+	- When you level up one time, the game adds 4 to the LSB at 0x23DDEB4, making the max level (99) to be stored as 8E 01 (little endian)
+	- Code for milker level 99 is this: 123DDEB4 0000018E
+		- Note that you need to refresh the menu page for it to show as 99
+
+Above hypothesis is wrong.
+newly observed behaviour:
+When the milker levels up, the byte at 0x23DDEB4 increments by 4. At level 64, it increments the byte at 0x23DDEB5 by 1.
+
+As for the shear, when the shear levels up, it increments by 2. At shear level 99, 0x23DDEB5 value would be C6. But if milker level is >= 64, value would be C7. 
+
+
+===================================================
+
