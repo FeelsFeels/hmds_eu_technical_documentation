@@ -123,7 +123,7 @@ D2000000 00000000
 ```
 
 Milker and Shears Max Level (99)  
-`123DDEB4 0000C78E`
+`123DDEB4 0000C78C`
 
 Milker +1 Level Every Use  
 `123DDED2 0000FFFF`
